@@ -1,0 +1,28 @@
+.sidebar-logo {
+  max-width: 80px;   /* Ajusta el ancho máximo del logo */
+    height: auto;      /* Mantiene la proporción del logo */
+}
+
+.figure-caption, figcaption, .quarto-figure-caption {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+    .toc a,
+    .toc li {
+        font-size: 0.9em;
+        line-height: 1.2em;
+    }
+}
+
+.toc a, 
+.toc li {
+    white-space: normal !important;   /* Permite envoltura */
+    word-wrap: break-word;             /* Corta palabra larga si es necesario */
+    overflow-wrap: break-word;
+    hyphens: auto;                    /* Divide palabras si se puede */
+}
+
+.justify {
+  text-align: justify !important
+}
