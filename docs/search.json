@@ -14,18 +14,11 @@
     "text": "Fundación educación para la salud: https://educacionparalasalud.org/\nMapa de la evidencia (OMS): https://bvsalud.org/mapa-de-evidencias/es/\nOrganización dedicada a la inequidad en salud: https://health-inequalities.eu/\nOrganización CFIR para estrategias de implementación: https://cfirguide.org/constructs/inner-setting/access-knowledge-information/\nOrganización para la evaluación del impacto en salud: https://www.3ieimpact.org/\nOrganización centrada en evaluar las necesidades del paciente: https://www.pcori.org/\nOrganización centrada en la creación de diseños de investigación: https://d3c.isr.umich.edu/\nOrganización Cosmin para herramientas de evaluación: https://www.cosmin.nl/\nGrupo de trabajo de determinantes sociales OMS: https://www.who.int/teams/social-determinants-of-health\nGrupo de trabajo de determinantes sociales Sociedad Española de Epidemiología: https://seepidemiologia.es/determinantes-sociales-de-la-salud/\nOrganización de observatorio de la salud: https://observatoriodesalud.es/\nEducación para la salud OMS: https://www.emro.who.int/health-education/publications/health-education.html\n\n\n\n\n\nLibro de epidemiología con R: https://epirhandbook.com/es/index.es.html\nArtículo sobre mapeado de la intervención: https://pmc.ncbi.nlm.nih.gov/articles/PMC6592155/\nArtículo sobre rueda del cambio: https://pubmed.ncbi.nlm.nih.gov/21513547/\nHerramientas para valoración de inequidad en salud: https://health-inequalities.eu/resources/tools-to-measure-and-address-health-inequalities/\n\n\n\n\n\nRepositorio de datos general: https://zenodo.org/\nOrganización centrada en seguimiento de enfermedades infecciosas: https://www.promedmail.org/\nDatos de inequidad en salud OMS: https://www.who.int/data/inequality-monitor/data\nRepositorio de datos europeos: https://ec.europa.eu/eurostat\nVisor de datos del Gobierno Vasco: https://www.geo.euskadi.eus/geobisorea\nIndicadores de la salud OMS: https://www.who.int/data/gho/data/indicators\nIndicadores de la salud España: https://inclasns.sanidad.gob.es/main.html\nIndicadores de la salud País Vasco: https://www.euskadi.eus/web01-a2osabe2/es/contenidos/recurso_tecnico/observatorio_salud/es_def/datos.html\nEncuesta de salud Europea: https://ec.europa.eu/eurostat/cache/metadata/en/hlth_det_esms.htm\nEncuesta de salud España: https://www.sanidad.gob.es/estadEstudios/estadisticas/encuestaSaludEspana/home.htm\nEncuesta de salud País Vasco: https://www.euskadi.eus/encuesta-salud/inicio/\nPriorización de intervenciones en salud OMS: https://www.who.int/observatories/global-observatory-on-health-research-and-development/resources/methods/priority-setting-methods\n\n\n\n\n\nSoftware de análisis estadístico Jamovi:https://www.jamovi.org/\nSoftware de análisis estadístico Orange:https://orangedatamining.com/\n\nSoftware epidemiológico Epidat (solo hace falta dar el correo para que guarden un registro, grauito): https://extranet.sergas.es/EPIWB/EPIWB/SolicitudeEpidat.aspx?IdPaxina=62715&idv=4&lng=es\nSoftware para la toma de decisiones en salud y otros ámbitos DiViz: https://diviz.org/\n\nSoftwares “Gold Standard” para investigación sanitaria (recomendados aunque con cierta curva de aprendizaje):\n\nSoftware profesional de programación en estadística R: https://cran.r-project.org/bin/windows/base/\nSoftware profesional de programación general Python: https://www.python.org/downloads/\nIDE popular para trabajar con R y Python RStudio: https://posit.co/download/rstudio-desktop/\n\n\n\n\n\nApp de Modelo SIR epidemiológico: https://jack-hester.shinyapps.io/sir-shiny-app/"
   },
   {
-    "objectID": "entradas.html",
-    "href": "entradas.html",
-    "title": "Clínica III",
+    "objectID": "posts/endrocrino.html",
+    "href": "posts/endrocrino.html",
+    "title": "Un enemigo en tu propia casa",
     "section": "",
-    "text": "Un enemigo en tu propia casa\n\n\n\nHistoria\n\n\n\nLa enfermedad aguda por radiación se trata de un cuadro tan desconocido como grave. Sin embargo, su relación con el sistema endocrino es mas estrecha de lo que la mayoría de…\n\n\n\nIker Apraiz\n\n\n5 sept 2026\n\n\n\n\n\n\nNo hay resultados"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "El enemigo invisible de endocrino\n\n\n\n26 de abril de 1986, Pripiat, Ucrania. Puede que para muchos de nosotros esa fecha no signifique nada. Puede que algunos la relacionéis vagamente. Puede que unos pocos conozcan la historia a la perfección. Sin embargo, si mencionase la palabra Chernobyl la gran mayoría la relacionaréis con peligrosidad, ocultismo y hasta con cierto aire de clickbait.\n\n\n\n\n\n\nChernobyl se ha convertido en parte de nuestra cultura popular aunque estuvo, ciertamente, a punto de convertirse en la piedra angular del fin de la humanidad tal y como la conocemos hoy. Pocos podrían pensar que dos ciencias tan distantes para al público general podrían encontrarse tan emparentadas. Y es que, a pesar del peligro que puede suponer una gran explosión nuclear, para la sanidad su veneno se extiende mas allá de lo que podemos observar. Y no hablaremos aquí del síndrome agudo por radiación sino de algo mucho mas silencioso: balas microscópicas que atacan directamente a uno de nuestros sistemas mas preciados. Su fortaleza la convirtió en su mayor debilidad. Física, ¡Santa física!\n\n\n¿Podríais adivinar cuál es ese veneno invisible?"
   },
   {
     "objectID": "index.html",
@@ -35,10 +28,24 @@
     "text": "“Solo los peces muertos…”\n\n\n“…siguen la corriente del río”\n\n\n\n\n\n\n\n¡Bienvenid@!\n\nTe encuentras en la página web dedicada a la asignatura de Clínica III.\nDentro de está página web encontrarás los apuntes donde se encuentran recogidos los conceptos trabajados en clase. A su vez, en la sección de “blog” encontrarás los distintos temas que comentaremos en clase.\n\n\n¡Ánimo!"
   },
   {
-    "objectID": "posts/endrocrino.html",
-    "href": "posts/endrocrino.html",
-    "title": "Un enemigo en tu propia casa",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "El enemigo invisible de endocrino\n\n\n\n26 de abril de 1986, Pripiat, Ucrania. Puede que para muchos de nosotros esa fecha no signifique nada. Puede que algunos la relacionéis vagamente. Puede que unos pocos conozcan la historia a la perfección. Sin embargo, si mencionase la palabra Chernobyl la gran mayoría la relacionaréis con peligrosidad, ocultismo y hasta con cierto aire de clickbait.\n\n\n\n\n\n\nChernobyl se ha convertido en parte de nuestra cultura popular aunque estuvo, ciertamente, a punto de convertirse en la piedra angular del fin de la humanidad tal y como la conocemos hoy. Pocos podrían pensar que dos ciencias tan distantes para al público general podrían encontrarse tan emparentadas. Y es que, a pesar del peligro que puede suponer una gran explosión nuclear, para la sanidad su veneno se extiende mas allá de lo que podemos observar. Y no hablaremos aquí del síndrome agudo por radiación sino de algo mucho mas silencioso: balas microscópicas que atacan directamente a uno de nuestros sistemas mas preciados. Su fortaleza la convirtió en su mayor debilidad. Física, ¡Santa física!\n\n\n¿Podríais adivinar cuál es ese veneno invisible?"
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "entradas.html",
+    "href": "entradas.html",
+    "title": "Clínica III",
+    "section": "",
+    "text": "Peor el remedio que la enfermedad\n\n\n\nHistoria\n\n\n\nEn la actualidad el sistema sanitario es sinónimo, en la mayoría de los casos, de seguridad y confianza. Sin embargo, no siempre fué así. Vivimos en tiempos muy recientes…\n\n\n\nIker Apraiz\n\n\n28 sept 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nUn enemigo en tu propia casa\n\n\n\nHistoria\n\n\n\nLa enfermedad aguda por radiación se trata de un cuadro tan desconocido como grave. Sin embargo, su relación con el sistema endocrino es mas estrecha de lo que la mayoría de…\n\n\n\nIker Apraiz\n\n\n5 sept 2026\n\n\n\n\n\n\nNo hay resultados"
+  },
+  {
+    "objectID": "posts/hematologia.html",
+    "href": "posts/hematologia.html",
+    "title": "Peor el remedio que la enfermedad",
+    "section": "",
+    "text": "Siglo XVIII, la guerra de independencia America se encontraba terminada. George Washington, quien fuera general de las tropas rebeldes y revolucionarías, aquel que había sobrevivido de forma milagrosa a innumerables batallas, se encontraba postrado en su cama frente a un enemigo invisible que no se podía combatir con las armas de los hombres.\n\n\n\n\n\n\nEl presidente padecía de una inflamación en la garganta que apenas le permitía respirar. Los mejores médicos de la época que se encontraban a su disposición aplicaron todo el conocimiento científico de la época. Hombres instruidos en las mejores escuelas de medicina le aplicaron paños calientes y eméticos para purgar el organismo. A su vez, se le realizaron sangrías sucesivas con el objetivo de reducir el exceso de sangre que causaba la enfermedad. La ciencia era clara, Washington debía perder 2 litros de sangre para poder recuperarse.\nTras 12 horas de tratamiento el presidente pálido, débil e hipotérmico finalmente, fallecía. Los médicos aplicaron los mejores tratamientos disponibles. Su conocimiento era correcto, sus premisas erróneas.\nEn la actualidad, se sigue discutiendo que esta fuese la causas real de la muerte de George Washington. Aunque si dejó una lección clara. Cuando las teorías son incorrectas incluso las personas mas versadas son ignorantes. De forma casi paradójica en la actualidad continuamos aplicando las sangrías aunque con otro objetivo totalmente distintos…\n\n\n¿Podrías adivinar cuál es ese otro objetivo?"
   }
 ]
