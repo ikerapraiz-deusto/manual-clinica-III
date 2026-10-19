@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X (Twitter) - Crisis Sanitaria Bilbao</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1d9bf0',
+                            hoverBlue: '#1a8cd8',
+                            darkBg: '#000000',
+                            cardBg: '#16181c',
+                            border: '#2f3336',
+                            textMuted: '#71767b',
+                            hoverGray: '#181818',
+                            danger: '#f4212e',
+                            warning: '#ffd400',
+                            success: '#00ba7c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000000;
+            color: #e7e9ea;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Keyframe for heart animation */
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .animate-heart {
+            animation: heartPulse 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-black text-[#e7e9ea] min-h-screen antialiased flex justify-center">
+
+    <div class="container mx-auto flex min-h-screen max-w-7xl relative">
+
+        <!-- ================= LEFT SIDEBAR ================= -->
+        <header class="w-16 xl:w-64 h-screen sticky top-0 flex flex-col justify-between p-2 xl:px-4 border-r border-brand-border z-20">
+            <div class="flex flex-col gap-1 items-center xl:items-start">
+                <!-- Logo -->
+                <a href="#" class="p-3 hover:bg-brand-hoverGray rounded-full transition w-max text-white my-1">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="w-7 h-7 fill-current">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                    </svg>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="flex flex-col gap-1 w-full">
+                    <a href="#" onclick="filterByCategory('all'); return false;" class="flex items-center gap-4 p-3 hover:bg-brand-hoverGray rounded-full text-xl font-bold transition">
+                        <i class="fa-solid fa-house text-xl w-7 text-center"></i>
+                        <span class="hidden xl:inline">Inicio</span>
+                    </a>
+                    <a href="#" onclick="document.getElementById('search-input').focus(); return false;" class="flex items-center gap-4 p-3 hover:bg-brand-hoverGray rounded-full text-xl transition text-gray-300">
+                        <i class="fa-solid fa-magnifying-glass text-xl w-7 text-center"></i>
+                        <span class="hidden xl:inline">Explorar</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-4 p-3 hover:bg-brand-hoverGray rounded-full text-xl transition text-gray-300 relative">
+                        <div class="relative">
+                            <i class="fa-regular fa-bell text-xl w-7 text-center"></i>
+                            <span class="absolute -top-1 -right-1 bg-brand-blue text-xs text-white rounded-full h-4 w-4 flex items-center justify-center font-bold">5</span>
+                        </div>
+                        <span class="hidden xl:inline">Notificaciones</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-4 p-3 hover:bg-brand-hoverGray rounded-full text-xl transition text-gray-300">
+                        <i class="fa-regular fa-envelope text-xl w-7 text-center"></i>
+                        <span class="hidden xl:inline">Mensajes</span>
+                    </a>
+                    <a href="#" onclick="filterByBookmark(); return false;" class="flex items-center gap-4 p-3 hover:bg-brand-hoverGray rounded-full text-xl transition text-gray-300">
+                        <i class="fa-regular fa-bookmark text-xl w-7 text-center"></i>
+                        <span class="hidden xl:inline">Guardados</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-4 p-3 hover:bg-brand-hoverGray rounded-full text-xl transition text-gray-300">
+                        <i class="fa-regular fa-user text-xl w-7 text-center"></i>
+                        <span class="hidden xl:inline">Perfil</span>
+                    </a>
+                </nav>
+
+                <!-- Post Button -->
+                <button onclick="focusTweetComposer()" class="mt-4 bg-brand-blue hover:bg-brand-hoverBlue text-white font-bold p-3 xl:py-3 xl:px-8 rounded-full w-full flex items-center justify-center shadow-lg transition">
+                    <span class="hidden xl:inline">Postear</span>
+                    <i class="fa-solid fa-feather-pointed text-lg xl:hidden"></i>
+                </button>
+            </div>
+
+            <!-- Profile Widget -->
+            <div class="mb-3 flex items-center justify-between p-2 hover:bg-brand-hoverGray rounded-full transition cursor-pointer w-full border border-brand-border/40">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+                    <div class="hidden xl:flex flex-col text-left text-sm">
+                        <span class="font-bold leading-tight">Estudiante UPV/EHU</span>
+                        <span class="text-brand-textMuted">@salud_publica_bilbao</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-ellipsis text-brand-textMuted hidden xl:inline"></i>
+            </div>
+        </header>
+
+        <!-- ================= MAIN FEED AREA ================= -->
+        <main class="flex-1 min-h-screen border-r border-brand-border max-w-[600px] w-full pb-20">
+            
+            <!-- Sticky Header & Tabs -->
+            <div class="sticky top-0 bg-black/80 backdrop-blur-md border-b border-brand-border z-10">
+                <div class="px-4 py-3 flex justify-between items-center xl:hidden">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" class="w-8 h-8 rounded-full object-cover">
+                    <span class="font-bold text-sm tracking-tight">Alerta Sanitaria Bilbao</span>
+                    <i class="fa-solid fa-triangle-exclamation text-brand-warning"></i>
+                </div>
+                
+                <div class="flex border-t border-brand-border xl:border-t-0 text-sm font-semibold">
+                    <button id="tab-for-you" onclick="switchTab('for-you')" class="flex-1 text-center py-3.5 hover:bg-white/5 transition relative text-white">
+                        Para ti
+                        <div id="indicator-for-you" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-brand-blue rounded-full"></div>
+                    </button>
+                    <button id="tab-following" onclick="switchTab('following')" class="flex-1 text-center py-3.5 hover:bg-white/5 transition relative text-brand-textMuted">
+                        Siguiendo
+                        <div id="indicator-following" class="hidden absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-brand-blue rounded-full"></div>
+                    </button>
+                </div>
+
+                <!-- Simulation Filters / Perspective Toggle -->
+                <div class="p-2 bg-brand-cardBg/80 flex items-center gap-1 overflow-x-auto no-scrollbar border-t border-brand-border text-xs px-3">
+                    <span class="text-brand-textMuted font-medium mr-1"><i class="fa-solid fa-filter"></i> Perspectiva:</span>
+                    <button onclick="filterByCategory('all')" id="filter-btn-all" class="px-3 py-1 rounded-full bg-brand-blue text-white font-bold transition">Todas</button>
+                    <button onclick="filterByCategory('official')" id="filter-btn-official" class="px-3 py-1 rounded-full bg-brand-hoverGray text-brand-textMuted font-medium hover:text-white transition flex items-center gap-1">
+                        <i class="fa-solid fa-shield-halved text-brand-blue"></i> Oficial / Ciencia
+                    </button>
+                    <button onclick="filterByCategory('conspiracy')" id="filter-btn-conspiracy" class="px-3 py-1 rounded-full bg-brand-hoverGray text-brand-textMuted font-medium hover:text-white transition flex items-center gap-1">
+                        <i class="fa-solid fa-triangle-exclamation text-brand-warning"></i> Rumores / Teorías
+                    </button>
+                </div>
+            </div>
+
+            <!-- Simulation Banner -->
+            <div class="bg-brand-warning/10 border-b border-brand-warning/30 p-3 text-xs text-brand-warning flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-flask text-sm"></i>
+                    <span><strong>Simulador de Salud Pública:</strong> Análisis de Infodemia en Bilbao (Patógeno X)</span>
+                </div>
+                <button onclick="triggerNewPostsSimulation()" class="bg-brand-warning text-black px-2.5 py-1 rounded-md font-bold text-[11px] hover:bg-yellow-400 transition">
+                    + Recibir Tuit Nuevo
+                </button>
+            </div>
+
+            <!-- New Posts Alert Toast -->
+            <div id="new-posts-toast" onclick="loadSimulatedPosts()" class="hidden bg-brand-blue hover:bg-brand-hoverBlue text-white text-xs font-bold text-center py-2 cursor-pointer transition border-b border-brand-border">
+                Mostrar 3 nuevos posts sobre #PatogenoBilbao
+            </div>
+
+            <!-- Tweet Composer -->
+            <div class="p-4 border-b border-brand-border flex gap-3">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+                <div class="flex-1">
+                    <textarea id="tweet-input" placeholder="¿Qué opinas sobre el brote en Basurto? #PatogenoBilbao" rows="2" class="w-full bg-transparent text-base text-white placeholder-brand-textMuted focus:outline-none resize-none"></textarea>
+                    
+                    <div class="flex items-center justify-between border-t border-brand-border/40 pt-3 mt-2">
+                        <div class="flex gap-3 text-brand-blue text-sm">
+                            <button type="button" class="hover:bg-brand-blue/10 p-2 rounded-full transition"><i class="fa-regular fa-image"></i></button>
+                            <button type="button" class="hover:bg-brand-blue/10 p-2 rounded-full transition"><i class="fa-solid fa-square-poll-horizontal"></i></button>
+                            <button type="button" class="hover:bg-brand-blue/10 p-2 rounded-full transition"><i class="fa-regular fa-face-smile"></i></button>
+                            <button type="button" class="hover:bg-brand-blue/10 p-2 rounded-full transition"><i class="fa-solid fa-location-dot"></i> Bilbao</button>
+                        </div>
+                        <button onclick="postTweet()" class="bg-brand-blue hover:bg-brand-hoverBlue text-white font-bold px-5 py-1.5 rounded-full text-sm transition">
+                            Postear
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feed Container -->
+            <div id="feed-container" class="divide-y divide-brand-border">
+                <!-- Posts rendered dynamically via JavaScript -->
+            </div>
+
+        </main>
+
+        <!-- ================= RIGHT SIDEBAR ================= -->
+        <aside class="hidden lg:flex flex-col gap-4 w-80 xl:w-96 p-4 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+            
+            <!-- Search Bar -->
+            <div class="bg-brand-cardBg flex items-center gap-3 px-4 py-2.5 rounded-full focus-within:ring-1 focus-within:ring-brand-blue focus-within:bg-black border border-transparent focus-within:border-brand-blue transition">
+                <i class="fa-solid fa-magnifying-glass text-brand-textMuted"></i>
+                <input id="search-input" onkeyup="searchTweets(this.value)" type="text" placeholder="Buscar temas o usuarios en Bilbao..." class="bg-transparent text-sm w-full focus:outline-none placeholder-brand-textMuted">
+            </div>
+
+            <!-- Emergency Alert Widget -->
+            <div class="bg-red-950/30 border border-red-500/30 rounded-2xl p-4">
+                <div class="flex items-center gap-2 text-red-400 font-bold text-sm mb-1">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    ALERTA SANITARIA LOCAL
+                </div>
+                <h4 class="font-bold text-white text-base">Patógeno B1D1</h4>
+                <p class="text-xs text-gray-300 mt-1 leading-relaxed">
+                    Detección de cuadros respiratorios atípicos en el HCUD. El ECDC llama a la calma mientras concluye la secuenciación.
+                </p>
+                <div class="mt-3 flex gap-2">
+                    <button onclick="filterByCategory('official')" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3 py-1.5 rounded-full transition">
+                        Ver Parte Oficial
+                    </button>
+                </div>
+            </div>
+
+            <!-- Trends Widget (Bilbao Centric) -->
+            <div class="bg-brand-cardBg rounded-2xl p-4 border border-brand-border/30">
+                <h3 class="font-bold text-xl mb-3">Tendencias en Bilbao</h3>
+                
+                <div class="flex flex-col gap-3">
+                    <div onclick="filterByTag('#PatogenoBilbao')" class="flex justify-between items-start cursor-pointer hover:bg-white/5 p-2 rounded transition">
+                        <div>
+                            <span class="text-xs text-brand-textMuted">Tendencia · Salud Pública</span>
+                            <p class="font-bold text-sm text-white">#PatogenoBilbao</p>
+                            <span class="text-xs text-brand-textMuted">34.2K posts</span>
+                        </div>
+                        <i class="fa-solid fa-ellipsis text-brand-textMuted"></i>
+                    </div>
+
+                    <div onclick="filterByTag('HCDC')" class="flex justify-between items-start cursor-pointer hover:bg-white/5 p-2 rounded transition">
+                        <div>
+                            <span class="text-xs text-brand-textMuted">Tendencia local</span>
+                            <p class="font-bold text-sm text-white">Hospital HCDC</p>
+                            <span class="text-xs text-brand-textMuted">18.9K posts</span>
+                        </div>
+                        <i class="fa-solid fa-ellipsis text-brand-textMuted"></i>
+                    </div>
+
+                    <div onclick="filterByTag('HCDC')" class="flex justify-between items-start cursor-pointer hover:bg-white/5 p-2 rounded transition">
+                        <div>
+                            <span class="text-xs text-brand-textMuted">Institucional</span>
+                            <p class="font-bold text-sm text-white">HCDC</p>
+                            <span class="text-xs text-brand-textMuted">12.5K posts</span>
+                        </div>
+                        <i class="fa-solid fa-ellipsis text-brand-textMuted"></i>
+                    </div>
+
+                    <div onclick="filterByTag('agua')" class="flex justify-between items-start cursor-pointer hover:bg-white/5 p-2 rounded transition">
+                        <div>
+                            <span class="text-xs text-brand-textMuted">Tendencia · Conspiración</span>
+                            <p class="font-bold text-sm text-white">Agua del Nervión</p>
+                            <span class="text-xs text-brand-textMuted">9.1K posts</span>
+                        </div>
+                        <i class="fa-solid fa-ellipsis text-brand-textMuted"></i>
+                    </div>
+
+                    <div onclick="filterByTag('Metro')" class="flex justify-between items-start cursor-pointer hover:bg-white/5 p-2 rounded transition">
+                        <div>
+                            <span class="text-xs text-brand-textMuted">Movilidad</span>
+                            <p class="font-bold text-sm text-white">Metro Bilbao</p>
+                            <span class="text-xs text-brand-textMuted">5.4K posts</span>
+                        </div>
+                        <i class="fa-solid fa-ellipsis text-brand-textMuted"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Accounts Widget -->
+            <div class="bg-brand-cardBg rounded-2xl p-4 border border-brand-border/30">
+                <h3 class="font-bold text-xl mb-4">A quién seguir en esta crisis</h3>
+
+                <div class="flex flex-col gap-4">
+                    <!-- User 1 -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=150" class="w-10 h-10 rounded-full object-cover">
+                            <div class="flex flex-col text-sm">
+                                <span class="font-bold hover:underline cursor-pointer flex items-center gap-1 text-white">
+                                    HCDC <i class="fa-solid fa-circle-check text-brand-blue text-xs"></i>
+                                </span>
+                                <span class="text-brand-textMuted">@HCDC</span>
+                            </div>
+                        </div>
+                        <button onclick="toggleFollow(this)" class="bg-white text-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gray-200 transition">
+                            Seguir
+                        </button>
+                    </div>
+
+                    <!-- User 2 -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=150" class="w-10 h-10 rounded-full object-cover">
+                            <div class="flex flex-col text-sm">
+                                <span class="font-bold hover:underline cursor-pointer flex items-center gap-1 text-white">
+                                    Dr. Gorka Virología
+                                </span>
+                                <span class="text-brand-textMuted">@Gorka_Virologo</span>
+                            </div>
+                        </div>
+                        <button onclick="toggleFollow(this)" class="bg-white text-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gray-200 transition">
+                            Seguir
+                        </button>
+                    </div>
+
+                    <!-- User 3 -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&q=80&w=150" class="w-10 h-10 rounded-full object-cover">
+                            <div class="flex flex-col text-sm">
+                                <span class="font-bold hover:underline cursor-pointer flex items-center gap-1 text-white">
+                                    Verdad Norte 👁️
+                                </span>
+                                <span class="text-brand-textMuted">@VerdadNorte</span>
+                            </div>
+                        </div>
+                        <button onclick="toggleFollow(this)" class="bg-white text-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gray-200 transition">
+                            Seguir
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="text-xs text-brand-textMuted flex flex-wrap gap-x-2 gap-y-1 px-2">
+                <span>Salud Pública</span>
+                <span>·</span>
+                <span>Caso Bilbao 2026</span>
+            </footer>
+
+        </aside>
+
+    </div>
+
+    <script>
+        // Seed Tweets Data containing realistic discourse from official, citizen, and conspiracy viewpoints
+        let tweets = [
+            {
+                id: 101,
+                author: "HCUC",
+                username: "HCUC",
+                avatar: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=150",
+                verified: true,
+                time: "10m",
+                content: "🔴 NOTA INFORMATIVA: Detectados 4 casos con sintomatología inespecífica no filiada en el HCUD. Los pacientes están aislados y estables. Se están aplicando protocolos epidemiológicos estándar y secuenciación genómica. Llamamos a la tranquilidad. #PatogenoBilbao",
+                image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=800",
+                replies: 142,
+                retweets: 389,
+                likes: 812,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                category: "official",
+                tab: "for-you"
+            },
+            {
+                id: 102,
+                author: "Verdad Norte 👁️",
+                username: "VerdadNorte",
+                avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&q=80&w=150",
+                verified: false,
+                time: "18m",
+                content: "🚨 ¿Casualidad que cortaran el agua anoche en Indautxu y hoy salgan con el 'Patógeno B1D1' en HCUD? Nos están fumigando la red de agua potable. Mi primo trabaja cerca del hospital y vio camiones militares a las 3:00 AM. ¡NO OS SOMETÁIS A SUS MASCARILLAS! 📢🔥 #PatogenoBilbao #NosMienten #BilbaoDespierta",
+                image: null,
+                replies: 98,
+                retweets: 245,
+                likes: 512,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                category: "conspiracy",
+                tab: "for-you"
+            },
+            {
+                id: 103,
+                author: "Dr. Gorka Orive",
+                username: "Gorka_Virologo",
+                avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=150",
+                verified: true,
+                time: "25m",
+                content: "Respecto a las noticias que llegan de HCUD: Un 'patógeno no identificado' no significa un nuevo virus letal programado. Generalmente es una variante estacional atípica o una bacteria oportunista. Paciencia, la microbiología del ECDC ya está secuenciando las muestras. Evitemos propagar pánico no fundado. 🧪🔬",
+                image: null,
+                replies: 31,
+                retweets: 110,
+                likes: 940,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                category: "official",
+                tab: "following"
+            },
+            {
+                id: 104,
+                author: "Miren Ibarguren",
+                username: "miren_bilbo",
+                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
+                verified: false,
+                time: "42m",
+                content: "Acabo de salir del Metro en Abando y ya hay gente agobiada mirando con desconfianza al que tose. Por favor, mantengamos el sentido común. Si estás enfermo quédate en casa y ponte mascarilla por empatía, sin dramas pero con prudencia. #Bilbao #PatogenoBilbao",
+                image: null,
+                replies: 12,
+                retweets: 18,
+                likes: 154,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                category: "official",
+                tab: "for-you"
+            },
+            {
+                id: 105,
+                author: "Bilbao Sin Censura",
+                username: "BilbaoDespierta",
+                avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150",
+                verified: false,
+                time: "1h",
+                content: "ATENCIÓN: Cierran pabellón en HCUD. Dicen que es por 'limpieza de rutina'. Casualmente 2 semanas después del foro de biotecnología en el Euskalduna. ¿Ensayo de control social en el Bocho? Masticad dióxido de cloro y no aceptéis confinamientos preventivos. 🚫🧪",
+                image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800",
+                replies: 87,
+                retweets: 178,
+                likes: 390,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                category: "conspiracy",
+                tab: "for-you"
+            }
+        ];
+
+        // Simulated incoming posts queue
+        const pendingSimulationPosts = [
+            {
+                id: 201,
+                author: "Ayuntamiento de Bilbao",
+                username: "Bilbao_Udala",
+                avatar: "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&q=80&w=150",
+                verified: true,
+                time: "Ahora",
+                content: "COMUNICADO MUNICIPAL: La red de agua potable de Bilbao cuenta con controles de calidad ininterrumpidos y es 100% segura. Desmentimos los rumores malintencionados que circulan en redes. Consulten solo canales oficiales del Gobierno Vasco y HCUD. #Bilbao",
+                image: null,
+                replies: 15,
+                retweets: 85,
+                likes: 420,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                category: "official",
+                tab: "for-you"
+            },
+            {
+                id: 202,
+                author: "Misterios del Nervión",
+                username: "MisterioBocho",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150",
+                verified: false,
+                time: "Ahora",
+                content: "El Ayuntamiento acaba de sacar nota diciendo que el agua está limpia 😂. ¡Excusas no pedidas, culpa manifestada! ¿Por qué hay medidores de aire extra en la Gran Vía desde el lunes? ¡Abred los ojos vecinos! 👁️⚠️",
+                image: null,
+                replies: 45,
+                retweets: 92,
+                likes: 210,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                category: "conspiracy",
+                tab: "for-you"
+            }
+        ];
+
+        // State Variables
+        let currentTab = 'for-you';
+        let currentCategory = 'all'; // 'all', 'official', 'conspiracy'
+        let searchQuery = '';
+        let onlyBookmarks = false;
+
+        // Initialize Feed
+        document.addEventListener("DOMContentLoaded", () => {
+            renderFeed();
+        });
+
+        // Switch Feed Tab
+        function switchTab(tab) {
+            currentTab = tab;
+            onlyBookmarks = false;
+            const tabForYou = document.getElementById('tab-for-you');
+            const tabFollowing = document.getElementById('tab-following');
+            const indForYou = document.getElementById('indicator-for-you');
+            const indFollowing = document.getElementById('indicator-following');
+
+            if (tab === 'for-you') {
+                tabForYou.classList.add('text-white');
+                tabForYou.classList.remove('text-brand-textMuted');
+                tabFollowing.classList.add('text-brand-textMuted');
+                tabFollowing.classList.remove('text-white');
+
+                indForYou.classList.remove('hidden');
+                indFollowing.classList.add('hidden');
+            } else {
+                tabFollowing.classList.add('text-white');
+                tabFollowing.classList.remove('text-brand-textMuted');
+                tabForYou.classList.add('text-brand-textMuted');
+                tabForYou.classList.remove('text-white');
+
+                indFollowing.classList.remove('hidden');
+                indForYou.classList.add('hidden');
+            }
+
+            renderFeed();
+        }
+
+        // Filter by Category Perspective
+        function filterByCategory(category) {
+            currentCategory = category;
+            onlyBookmarks = false;
+
+            // Reset buttons styling
+            ['all', 'official', 'conspiracy'].forEach(cat => {
+                const btn = document.getElementById(`filter-btn-${cat}`);
+                if (btn) {
+                    if (cat === category) {
+                        btn.className = "px-3 py-1 rounded-full bg-brand-blue text-white font-bold transition";
+                    } else {
+                        btn.className = "px-3 py-1 rounded-full bg-brand-hoverGray text-brand-textMuted font-medium hover:text-white transition";
+                    }
+                }
+            });
+
+            renderFeed();
+        }
+
+        // Filter by Tag or Search Query
+        function filterByTag(tag) {
+            document.getElementById('search-input').value = tag;
+            searchTweets(tag);
+        }
+
+        function searchTweets(query) {
+            searchQuery = query.toLowerCase().trim();
+            renderFeed();
+        }
+
+        function filterByBookmark() {
+            onlyBookmarks = true;
+            renderFeed();
+        }
+
+        // Render Tweets
+        function renderFeed() {
+            const container = document.getElementById('feed-container');
+            container.innerHTML = '';
+
+            let filtered = tweets.filter(t => {
+                // Tab filter
+                const matchesTab = (currentTab === 'for-you' || t.tab === currentTab || t.isUserTweet);
+                // Category filter
+                const matchesCategory = (currentCategory === 'all' || t.category === currentCategory);
+                // Search filter
+                const matchesSearch = !searchQuery || 
+                    t.content.toLowerCase().includes(searchQuery) || 
+                    t.author.toLowerCase().includes(searchQuery) || 
+                    t.username.toLowerCase().includes(searchQuery);
+                // Bookmark filter
+                const matchesBookmark = !onlyBookmarks || t.isBookmarked;
+
+                return matchesTab && matchesCategory && matchesSearch && matchesBookmark;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center text-brand-textMuted">
+                        <i class="fa-solid fa-circle-nodes text-3xl mb-2 block text-brand-border"></i>
+                        No se encontraron publicaciones con los criterios seleccionados.
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(tweet => {
+                const tweetEl = document.createElement('article');
+                tweetEl.className = "p-4 hover:bg-white/[0.02] cursor-pointer transition flex gap-3 relative";
+                
+                // Badge for narrative type
+                let categoryBadge = '';
+                if (tweet.category === 'official') {
+                    categoryBadge = `<span class="text-[10px] bg-brand-blue/10 text-brand-blue border border-brand-blue/30 px-2 py-0.5 rounded-full font-bold"><i class="fa-solid fa-check-double"></i> Verificado / Oficial</span>`;
+                } else if (tweet.category === 'conspiracy') {
+                    categoryBadge = `<span class="text-[10px] bg-brand-warning/10 text-brand-warning border border-brand-warning/30 px-2 py-0.5 rounded-full font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Rumor / No verificado</span>`;
+                }
+
+                tweetEl.innerHTML = `
+                    <img src="${tweet.avatar}" class="w-10 h-10 rounded-full object-cover">
+                    <div class="flex-1">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span class="font-bold hover:underline text-white flex items-center gap-1">
+                                    ${tweet.author}
+                                    ${tweet.verified ? '<i class="fa-solid fa-circle-check text-brand-blue text-xs"></i>' : ''}
+                                </span>
+                                <span class="text-brand-textMuted text-sm">@${tweet.username}</span>
+                                <span class="text-brand-textMuted text-sm">·</span>
+                                <span class="text-brand-textMuted text-sm">${tweet.time}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                ${categoryBadge}
+                                <button class="text-brand-textMuted hover:text-brand-blue rounded-full p-1 transition">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <p class="text-[15px] mt-1 text-gray-100 whitespace-pre-line leading-relaxed">${highlightHashtags(escapeHtml(tweet.content))}</p>
+
+                        <!-- Attached Image -->
+                        ${tweet.image ? `<div class="mt-3 rounded-2xl overflow-hidden border border-brand-border/60"><img src="${tweet.image}" class="w-full max-h-80 object-cover" onerror="this.style.display='none'"></div>` : ''}
+
+                        <!-- Action Buttons -->
+                        <div class="flex justify-between text-brand-textMuted mt-3 max-w-md text-sm">
+                            <!-- Reply -->
+                            <button onclick="openReplyModal('${tweet.username}', event)" class="flex items-center gap-2 hover:text-brand-blue transition group">
+                                <div class="p-2 rounded-full group-hover:bg-brand-blue/10">
+                                    <i class="fa-regular fa-comment"></i>
+                                </div>
+                                <span>${tweet.replies}</span>
+                            </button>
+
+                            <!-- Retweet -->
+                            <button onclick="toggleRetweet(${tweet.id}, event)" class="flex items-center gap-2 ${tweet.isRetweeted ? 'text-brand-success font-bold' : 'hover:text-brand-success'} transition group">
+                                <div class="p-2 rounded-full group-hover:bg-brand-success/10">
+                                    <i class="fa-solid fa-retweet"></i>
+                                </div>
+                                <span>${tweet.retweets}</span>
+                            </button>
+
+                            <!-- Like -->
+                            <button onclick="toggleLike(${tweet.id}, event)" class="flex items-center gap-2 ${tweet.isLiked ? 'text-brand-danger font-bold' : 'hover:text-brand-danger'} transition group">
+                                <div class="p-2 rounded-full group-hover:bg-brand-danger/10">
+                                    <i class="${tweet.isLiked ? 'fa-solid animate-heart' : 'fa-regular'} fa-heart"></i>
+                                </div>
+                                <span>${tweet.likes}</span>
+                            </button>
+
+                            <!-- Bookmark -->
+                            <button onclick="toggleBookmark(${tweet.id}, event)" class="flex items-center gap-2 ${tweet.isBookmarked ? 'text-brand-blue' : 'hover:text-brand-blue'} transition group">
+                                <div class="p-2 rounded-full group-hover:bg-brand-blue/10">
+                                    <i class="${tweet.isBookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i>
+                                </div>
+                            </button>
+
+                            <!-- Share -->
+                            <button onclick="copyPostLink(event)" class="flex items-center gap-2 hover:text-brand-blue transition group">
+                                <div class="p-2 rounded-full group-hover:bg-brand-blue/10">
+                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(tweetEl);
+            });
+        }
+
+        // Action: Create Post
+        function postTweet() {
+            const input = document.getElementById('tweet-input');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            // Classify automatically based on content
+            let userCategory = 'official';
+            if (text.toLowerCase().includes('nos mienten') || text.toLowerCase().includes('verdad') || text.toLowerCase().includes('fumigando') || text.toLowerCase().includes('control')) {
+                userCategory = 'conspiracy';
+            }
+
+            const newTweet = {
+                id: Date.now(),
+                author: "Estudiante UPV/EHU",
+                username: "salud_publica_bilbao",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150",
+                verified: true,
+                time: "Ahora",
+                content: text,
+                image: null,
+                replies: 0,
+                retweets: 0,
+                likes: 0,
+                isLiked: false,
+                isRetweeted: false,
+                isBookmarked: false,
+                isUserTweet: true,
+                category: userCategory,
+                tab: currentTab
+            };
+
+            tweets.unshift(newTweet);
+            input.value = '';
+            renderFeed();
+        }
+
+        // Trigger Real-time simulation of incoming posts
+        function triggerNewPostsSimulation() {
+            const toast = document.getElementById('new-posts-toast');
+            toast.classList.remove('hidden');
+        }
+
+        function loadSimulatedPosts() {
+            pendingSimulationPosts.forEach(p => {
+                tweets.unshift(p);
+            });
+            pendingSimulationPosts.length = 0; // Clear
+            document.getElementById('new-posts-toast').classList.add('hidden');
+            renderFeed();
+        }
+
+        // Interactive Toggles
+        function toggleLike(id, event) {
+            event.stopPropagation();
+            const tweet = tweets.find(t => t.id === id);
+            if (tweet) {
+                tweet.isLiked = !tweet.isLiked;
+                tweet.likes += tweet.isLiked ? 1 : -1;
+                renderFeed();
+            }
+        }
+
+        function toggleRetweet(id, event) {
+            event.stopPropagation();
+            const tweet = tweets.find(t => t.id === id);
+            if (tweet) {
+                tweet.isRetweeted = !tweet.isRetweeted;
+                tweet.retweets += tweet.isRetweeted ? 1 : -1;
+                renderFeed();
+            }
+        }
+
+        function toggleBookmark(id, event) {
+            event.stopPropagation();
+            const tweet = tweets.find(t => t.id === id);
+            if (tweet) {
+                tweet.isBookmarked = !tweet.isBookmarked;
+                renderFeed();
+            }
+        }
+
+        function toggleFollow(btn) {
+            if (btn.innerText === "Seguir") {
+                btn.innerText = "Siguiendo";
+                btn.classList.remove("bg-white", "text-black", "hover:bg-gray-200");
+                btn.classList.add("bg-transparent", "text-white", "border", "border-brand-border", "hover:border-red-500", "hover:text-red-500");
+            } else {
+                btn.innerText = "Seguir";
+                btn.classList.remove("bg-transparent", "text-white", "border", "border-brand-border", "hover:border-red-500", "hover:text-red-500");
+                btn.classList.add("bg-white", "text-black", "hover:bg-gray-200");
+            }
+        }
+
+        function openReplyModal(username, event) {
+            event.stopPropagation();
+            const input = document.getElementById('tweet-input');
+            input.value = `@${username} `;
+            input.focus();
+        }
+
+        function copyPostLink(event) {
+            event.stopPropagation();
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            alert("Enlace del post copiado al portapapeles.");
+        }
+
+        function focusTweetComposer() {
+            document.getElementById('tweet-input').focus();
+        }
+
+        // Helpers
+        function highlightHashtags(text) {
+            return text.replace(/#(\w+)/g, '<span class="text-brand-blue hover:underline cursor-pointer">#$1</span>');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

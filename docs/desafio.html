@@ -101,23 +101,46 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
 
 <style>
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
+  *, *::before, *::after {
+      box-sizing: border-box;
+  }
 
-    html, body {
-        height: 100vh;
-        margin: 0;
-    }
+  html, body {
+      height: 100vh;
+      margin: 0;
+  }
 
-    body {
-        padding: 15vh 10vw !important;
-    }
-    /* Estilo para la línea divisora vertical */
-        .columna-divisora {
-        border-right: 2px solid #e0e0e0; /* Color y grosor de la línea */
-        padding-right: 2rem;            /* Espacio interno antes de la línea */
-        }
+  body {
+      padding: 15vh 10vw !important;
+  }
+
+  .columna-divisora {
+      border-right: 2px solid #d3d0d0 ;
+      padding-right: 2rem;
+  }
+
+  /* ========================================
+     NOTICIAS A ANCHO COMPLETO
+     ======================================== */
+
+  .noticias-fullwidth {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      margin-left: calc(50% - 50vw) !important;
+      margin-right: calc(50% - 50vw) !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+  }
+
+  .iframe-noticias {
+      display: block;
+      width: 100% !important;
+      height: 100px;
+      border: 1px solid transparent;
+      border-radius: 0;
+      margin: 0 !important;
+      padding: 0;
+  }
 </style>
 
 
@@ -322,6 +345,11 @@ ul.task-list li input[type="checkbox"] {
 </i> 
 <span class="menu-text">Apuntes</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./desafio.html" aria-current="page"> <i class="bi bi-puzzle" role="img">
+</i> 
+<span class="menu-text">Desafío</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -362,59 +390,31 @@ Deusto University
 <p style="font-size: 1.75em; text-align: center;">
 <strong>Situación actual</strong>
 </p>
-<p>Se ha detectado un brote de una enfermedad emergente desconocida hasta la fecha con 150 casos detectados. Por el momento se estima una R_0 de [1 - 7] con una tasa de letalidad del 20% - 80% de los casos. Los pacientes desarrollan un SDRA grave y un shock séptico que termina en fallo multiorgánico.</p>
+<p>Se ha detectado un brote de una enfermedad emergente desconocida hasta la fecha con 250 casos detectados. Por el momento se estima una R_0 de [1 - 7] con una tasa de letalidad del 75% de los casos. Los pacientes desarrollan un SDRA grave y un shock séptico que termina en fallo multiorgánico.</p>
 <div class="grid">
 <!-- Subcolumna izquierda: Mapa -->
-<div class="g-col-8">
+<div class="g-col-12">
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-aa8fcdb230068f117d18" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-aa8fcdb230068f117d18">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[43.2615,43.2578,43.2712,43.2589],[-2.9372,-2.9234,-2.945,-2.9145],[16.43167672515498,12.72792206135786,18.97366596101028,16.97056274847714],null,null,{"interactive":true,"className":"","stroke":true,"color":["#D9534F","#D9534F","#D9534F","#D9534F"],"weight":2,"opacity":0.5,"fill":true,"fillColor":["#D9534F","#D9534F","#D9534F","#D9534F"],"fillOpacity":0.7},null,null,["<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Abando / Indautxu<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote A<br><strong>Casos activos: <\/strong>30<br><strong>Foco sospechoso: <\/strong>Hostelería<\/div>","<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Casco Viejo<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote B<br><strong>Casos activos: <\/strong>18<br><strong>Foco sospechoso: <\/strong>Hostelería<\/div>","<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Deusto<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote C<br><strong>Casos activos: <\/strong>40<br><strong>Foco sospechoso: <\/strong>Centro Escolar<\/div>","<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Santutxu<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote D<br><strong>Casos activos: <\/strong>32<br><strong>Foco sospechoso: <\/strong>Residencia estudiantil<\/div>"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#D9534F"],"labels":["Desconocido"],"na_color":null,"na_label":"NA","opacity":0.9,"position":"bottomright","type":"factor","title":"Patógeno Detectado","extra":null,"layerId":null,"className":"info legend","group":null}]}],"setView":[[43.26,-2.935],13.5,[]],"limits":{"lat":[43.2578,43.2712],"lng":[-2.945,-2.9145]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-44a2493329381f673963" style="width:100%;height:750px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-44a2493329381f673963">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[43.2615,43.2578,43.2712,43.2589,43.255519],[-2.9372,-2.9234,-2.945,-2.9145,-2.905454],[25.98076211353316,23.2379000772445,26.83281572999748,13.41640786499874,11.61895003862225],null,null,{"interactive":true,"className":"","stroke":true,"color":["#D9534F","#D9534F","#D9534F","#D9534F","#D9534F"],"weight":2,"opacity":0.5,"fill":true,"fillColor":["#D9534F","#D9534F","#D9534F","#D9534F","#D9534F"],"fillOpacity":0.7},null,null,["<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Abando / Indautxu<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote A<br><strong>Casos activos: <\/strong>75<br><strong>Foco sospechoso: <\/strong>Hostelería<\/div>","<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Casco Viejo<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote B<br><strong>Casos activos: <\/strong>60<br><strong>Foco sospechoso: <\/strong>Hostelería<\/div>","<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Deusto<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote C<br><strong>Casos activos: <\/strong>80<br><strong>Foco sospechoso: <\/strong>Centro Escolar<\/div>","<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Santutxu<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote D<br><strong>Casos activos: <\/strong>20<br><strong>Foco sospechoso: <\/strong>Centro de trabajo<\/div>","<div style='font-family: sans-serif; font-size: 13px;'><strong style='color: #333;'>Barrio: <\/strong>Txurnidaga<br><strong style='color: #d9534f;'>Brote: <\/strong>Brote E<br><strong>Casos activos: <\/strong>15<br><strong>Foco sospechoso: <\/strong>Hosteleria<\/div>"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#D9534F"],"labels":["Desconocido"],"na_color":null,"na_label":"NA","opacity":0.9,"position":"bottomright","type":"factor","title":"Patógeno Detectado","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addProviderTiles","args":["OpenTopoMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"setView":[[43.26,-2.935],13.5,[]],"limits":{"lat":[43.255519,43.2712],"lng":[-2.945,-2.905454]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-<div class="g-col-4">
-<p>sssss</p>
 </div>
 </div>
 </div>
 <div class="g-col-4">
 <p style="font-size: 1.5em; text-align: center;">
-<strong>Noticias</strong>
+<strong>Redes</strong>
 </p>
-<div class="callout callout-style-default callout-note callout-titled" title="prueba">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>prueba
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Note that there are five types of callouts, including: <code>note</code>, <code>warning</code>, <code>important</code>, <code>tip</code>, and <code>caution</code>.</p>
+<iframe src="twitter.html" width="100%" height="750px" style="border: 1px solid #2f3336; border-radius: 12px; max-width: 1000px; margin: 0 auto; display: block;"></iframe>
 </div>
 </div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="prueba">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>prueba
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Note that there are five types of callouts, including: <code>note</code>, <code>warning</code>, <code>important</code>, <code>tip</code>, and <code>caution</code>.</p>
-</div>
-</div>
-</div>
-</div>
+<p><br></p>
+<script src="https://giscus.app/client.js" data-repo="ikerapraiz-deusto/manual-clinica-III" data-repo-id="R_kgDOQY_JNw" data-category="General" data-category-id="DIC_kwDOQY_JN84DIxz4" data-mapping="number" data-term="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="es" crossorigin="anonymous" async="">
+</script>
+<div class="column-page noticias-fullwidth">
+<iframe src="noticias_1.html" class="iframe-noticias"></iframe>
 </div>
 
 

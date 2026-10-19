@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinta de Noticias LTR - Patógeno X Bilbao</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tickerBg: '#0e0d0d',
+                        cardBg: '#f5f5f8',
+                        borderCol: '#ffffff',
+                        alertRed: '#f4212e',
+                        officialBlue: '#1d9bf0',
+                        conspiracyOrange: '#ffd400'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Force body to strictly fit 100px height without vertical scrollbars */
+        html, body {
+            height: 100px;
+            max-height: 100px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f9fafa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            user-select: none;
+        }
+
+        /* Continuous Left to Right Animation (0% starts off at -50%, 100% moves to 0%) */
+        @keyframes ticker-ltr {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            align-items: center;
+            height: 100%;
+            animation: ticker-ltr var(--ticker-speed, 35s) linear infinite;
+            will-change: transform;
+        }
+
+        /* Hover pauses scrolling */
+        .ticker-wrapper:hover .ticker-track {
+            animation-play-state: paused;
+        }
+
+        /* Smooth edge fade gradient */
+        .fade-mask {
+            mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-2">
+
+    <div class="ticker-wrapper w-full h-[84px] bg-cardBg border border-borderCol rounded-xl overflow-hidden relative flex items-center shadow-2xl fade-mask">
+        
+        <!-- Fixed Live Indicator Badge on Left Edge -->
+        <div class="z-20 shrink-0 bg-alertRed text-white px-3 py-1.5 ml-2 rounded-lg font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg border border-red-500/30">
+            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span>
+            <span>ÚLTIMA HORA</span>
+        </div>
+
+        <!-- Scrollable Ticker Items Track (LTR) -->
+        <div id="ticker-track" class="ticker-track pl-4">
+            <!-- News items dynamically injected by JS -->
+        </div>
+
+    </div>
+
+    <script>
+        const news = [
+            {
+                type: "ALERT",
+                badge: "🚨 URGENTE",
+                badgeStyle: "bg-red-500/20 text-red-400 border-red-500/50",
+                icon: "fa-hospital",
+                title: "El ECDC eleva hasta 250 posibles casos en la villa de Bilbao",
+                time: "12:40"
+            },
+            {
+                type: "OFFICIAL",
+                badge: "🔬 SALUD PÚBLICA",
+                badgeStyle: "bg-sky-500/20 text-sky-400 border-sky-500/50",
+                icon: "fa-network-wired",
+                title: "Aislados 5 nodos de contagio en Bilbao: Deusto (80), Casco Viejo (60), Santuxu (20), Txurdinaga (15), Abando / Indautxu (75)",
+                time: "12:35"
+            },
+            {
+                type: "RUMOR",
+                badge: "👁️ BULO / RUMOR",
+                badgeStyle: "bg-yellow-500/20 text-yellow-400 border-yellow-500/50",
+                icon: "fa-triangle-exclamation",
+                title: "Consorcio de Aguas desmiente contaminación en la red de Indautxu y Deusto: El agua es 100% potable",
+                time: "12:28"
+            },
+            {
+                type: "OFFICIAL",
+                badge: "🏥 HOSP. DEUSTO",
+                badgeStyle: "bg-purple-500/20 text-purple-400 border-purple-500/50",
+                icon: "fa-dna",
+                title: "Iniciada la secuenciación genómica rápida del Patógeno B1D1 para identificar el agente etiológico",
+                time: "12:15"
+            },
+            {
+                type: "RUMOR",
+                badge: "👁️ CONSPIRANOIA",
+                badgeStyle: "bg-yellow-500/20 text-yellow-400 border-yellow-500/50",
+                icon: "fa-comments",
+                title: "Teorías en redes sociales especulan con fugas en laboratorios; autoridades piden evitar desinformación",
+                time: "12:02"
+            }
+        ];
+
+        function createCard(item) {
+            return `
+                <div class="flex items-center gap-3 bg-tickerBg/80 border border-borderCol/80 px-4 py-2.5 rounded-lg mx-2 shrink-0 hover:border-sky-500/50 transition duration-200 cursor-pointer">
+                    <span class="text-[11px] font-extrabold px-2 py-0.5 rounded border uppercase tracking-wide font-mono ${item.badgeStyle}">
+                        ${item.badge}
+                    </span>
+                    <i class="fa-solid ${item.icon} text-gray-400 text-xs"></i>
+                    <span class="text-xs font-semibold text-gray-200 whitespace-nowrap">
+                        ${item.title}
+                    </span>
+                    <span class="text-[10px] font-mono text-gray-500 border-l border-borderCol pl-2.5 ml-1">
+                        ${item.time}
+                    </span>
+                </div>
+            `;
+        }
+
+        function initTicker() {
+            const track = document.getElementById('ticker-track');
+            // Duplicate the news list multiple times to ensure seamless infinite looping without gaps
+            const fullDataset = [...news, ...news, ...news, ...news];
+            track.innerHTML = fullDataset.map(item => createCard(item)).join('');
+        }
+
+        window.onload = initTicker;
+    </script>
+</body>
+</html>
