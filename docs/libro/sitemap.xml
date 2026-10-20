@@ -22,14 +22,30 @@
   </url>
   <url>
     <loc>https://example.com/hemo_2.html</loc>
-    <lastmod>2026-09-25T06:50:44.905Z</lastmod>
+    <lastmod>2026-09-29T19:58:05.884Z</lastmod>
   </url>
   <url>
     <loc>https://example.com/hemo_3.html</loc>
     <lastmod>2026-09-18T10:33:45.170Z</lastmod>
   </url>
   <url>
+    <loc>https://example.com/desafio.html</loc>
+    <lastmod>2026-09-23T12:22:04.958Z</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/desafio_1.html</loc>
+    <lastmod>2026-10-19T08:59:03.200Z</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/desafio_2.html</loc>
+    <lastmod>2026-09-23T13:09:20.932Z</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/desafio_3.html</loc>
+    <lastmod>2026-09-23T13:15:52.936Z</lastmod>
+  </url>
+  <url>
     <loc>https://example.com/ejercicios.html</loc>
-    <lastmod>2026-09-23T16:46:18.493Z</lastmod>
+    <lastmod>2026-10-19T17:57:59.172Z</lastmod>
   </url>
 </urlset>
