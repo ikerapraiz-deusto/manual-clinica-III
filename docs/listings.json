@@ -2,6 +2,7 @@
   {
     "listing": "/entradas.html",
     "items": [
+      "/posts/lepra.html",
       "/posts/antifragil.html",
       "/posts/hematologia.html",
       "/posts/endrocrino.html"
