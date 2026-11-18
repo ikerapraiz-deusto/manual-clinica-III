@@ -73,6 +73,22 @@
     <lastmod>2025-10-09T16:54:48.000Z</lastmod>
   </url>
   <url>
+    <loc>https://example.com/onco_1.html</loc>
+    <lastmod>2025-10-27T17:27:42.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/onco_2.html</loc>
+    <lastmod>2026-11-18T07:26:47.142Z</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/onco_3.html</loc>
+    <lastmod>2025-11-19T16:50:50.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/onco_4.html</loc>
+    <lastmod>2025-11-20T12:10:56.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://example.com/Taller_1.html</loc>
     <lastmod>2026-10-22T11:54:01.212Z</lastmod>
   </url>
@@ -86,6 +102,6 @@
   </url>
   <url>
     <loc>https://example.com/ejercicios.html</loc>
-    <lastmod>2026-11-03T11:46:12.283Z</lastmod>
+    <lastmod>2026-11-17T11:02:15.971Z</lastmod>
   </url>
 </urlset>
